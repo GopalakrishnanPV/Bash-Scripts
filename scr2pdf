@@ -1,0 +1,34 @@
+#! /bin/bash
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+NC='\033[0m'
+clear
+echo Enter the user story number : 
+read USID
+echo Enter the story description :
+read USDESC
+SRCDIR="/home/$USER/Pictures/Screenshots"
+DESTDIR="/home/$USER/XPO/Screenshots/$(date +%d-%m-%Y)/XPO-$USID"
+COUNT=$(ls -1 $SRCDIR/*.png 2>/dev/null | wc -l)
+if [ $COUNT = 0 ]
+then
+echo -e ${ORANGE}No screenshots found${NC}
+exit
+fi
+echo Number of screenshots found : $COUNT
+mkdir -p $SRCDIR $DESTDIR
+
+CreatePDF(){
+WRKDIR=$(pwd)
+cd $SRCDIR && convert *.png $USID.pdf && mv *.png *.pdf $DESTDIR
+}
+CreatePDF
+if [ $? -eq 0 ]; then
+    echo -e ${GREEN}PDF Created Successfully${NC}
+    notify
+    nemo $DESTDIR
+else
+    echo -e ${RED}PDF Creation Failed${NC}
+    rm -rf $DESTDIR
+fi

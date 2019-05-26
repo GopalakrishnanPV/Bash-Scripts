@@ -1,0 +1,15 @@
+#!/bin/bash
+#title          :upgrade
+#description    :Fully upgrades the OS
+#author         :mrblue
+#date           :20190525
+#version        :1.0
+#usage          :upgrade
+#notes          :
+#bash_version   :4.4.19(1)-release
+#============================================================================
+clear
+echo Initiating system upgrade..
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt- autoremove -y
+echo System upgrade complete.
+notify
