@@ -1,4 +1,13 @@
 #!/bin/bash
+#title          :enablewifi
+#description    :Enables Wifi in Linux mint 19
+#author         :mrblue
+#date           :20191228
+#version        :1.0
+#usage          :./enablewifi
+#bash_version   :4.4.20(1)-release
+#============================================================================
+
 git clone -b extended https://github.com/lwfinger/rtlwifi_new.git
 sudo dkms add ./rtlwifi_new
 sudo dkms install rtlwifi-new/0.6

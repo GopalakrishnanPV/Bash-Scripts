@@ -1,4 +1,13 @@
-#! /bin/bash
+#!/bin/bash
+#title          :scr2pdf
+#description    :Converts the screenshot images to pdf format
+#author         :mrblue
+#date           :20191228
+#version        :1.0
+#usage          :./scr2pdf
+#bash_version   :4.4.20(1)-release
+#============================================================================
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
@@ -8,10 +17,12 @@ echo Enter the user story number :
 read USID
 echo Enter the story description :
 read USDESC
-SRCDIR="/home/$USER/Pictures/Screenshots"
-DESTDIR="/home/$USER/XPO/Screenshots/$(date +%d-%m-%Y)/XPO-$USID"
+SRCDIR=/mnt/Storage/XPO/Screenshots
+DESTDIR=/mnt/Storage/XPO/Screenshots/$(date +%Y-%m-%d)/XPO-$USID
+echo "Test"
+
 COUNT=$(ls -1 $SRCDIR/*.png 2>/dev/null | wc -l)
-if [ $COUNT = 0 ]
+if [$COUNT=0]
 then
 echo -e ${ORANGE}No screenshots found${NC}
 exit
@@ -23,10 +34,12 @@ CreatePDF(){
 WRKDIR=$(pwd)
 cd $SRCDIR && convert *.png $USID.pdf && mv *.png *.pdf $DESTDIR
 }
+
 CreatePDF
 if [ $? -eq 0 ]; then
     echo -e ${GREEN}PDF Created Successfully${NC}
     notify
+    read -p "Press any key to continue..."
     nemo $DESTDIR
 else
     echo -e ${RED}PDF Creation Failed${NC}

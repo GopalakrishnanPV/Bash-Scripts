@@ -1,11 +1,11 @@
 #!/bin/bash
-#title           :makebash
-#description     :This script will make a header for a bash script.
-#author		 :mrblue
-#date            :20190526
-#version         :1.0
-#usage		 :makesh
-#notes           :Install Nano and Vim to use this script.
+#title           : makebash
+#description     : This script will make a header for a bash script.
+#author		     : mrblue
+#date            : 20190526
+#version         : 1.0
+#usage		     : makebash
+#notes           : Install Nano and Vim to use this script.
 #==============================================================================
 
 today=$(date +%Y%m%d)
@@ -30,14 +30,11 @@ _select_title(){
         "Please select another title."
         _select_title
     fi
-
 }
 
 _select_title
 
 printf "Enter a description: " ; read -r dscrpt
-printf "Enter your name: " ; read -r name
-printf "Enter the version number: " ; read -r vnum
 
 # Format the output and write it to a file.
 printf "%-16s\n\
@@ -50,20 +47,12 @@ printf "%-16s\n\
 %-16s%-8s\n\
 %-16s%-8s\n\
 %s\n\n\n" '#!/bin/bash' '#title' ":$title" '#description' \
-":${dscrpt}" '#author' ":$name" '#date' ":$today"  '#version' \
-":$vnum" '#usage' ":./$title" '#bash_version' \
+":${dscrpt}" '#author' ":${USER}" '#date' ":$today"  '#version' \
+":1.0" '#usage' ":./$title" '#bash_version' \
 ":${BASH_VERSION}" \#$div${div} > $title
 
 # Make the file executable.
 chmod +x $title
-printf "Do you want to copy the script to bin? : " ; read -r cptobin
-cptobin=${cptobin,,}
-echo  $cptobin
-if [ $cptobin="y" ] ; then
-sudo cp $title /usr/local/bin/$title
-title=/usr/local/bin/$title
-fi
-# /usr/bin/clear
 
 _select_editor(){
 

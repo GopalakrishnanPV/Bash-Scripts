@@ -1,2 +1,15 @@
+#!/bin/bash     
+#title          :scrasfile
+#description    :Captures the screenshot of the window as a file
+#author         :Gopalakrishnan
+#date           :20191228
+#version        :1.0    
+#usage          :./screenshot_as_file
+#bash_version   :4.4.20(1)-release
+#============================================================================        
+
 #! /bin/bash
-gnome-screenshot -f ~/Pictures/Screenshots/$(date +%Y%m%d%H%M%S).png
+DEST_PATH=/mnt/Storage/XPO/Screenshots
+mkdir -p $DEST_PATH && gnome-screenshot -f $DEST_PATH/$(date +%Y%m%d%H%M%S).png
+
+
