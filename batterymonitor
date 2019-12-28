@@ -1,0 +1,31 @@
+#!/bin/bash
+#title          :batterymonitor
+#description    :Monitors the battery and alerts the user if the battery exceeds the thresholds
+#author         :mrblue
+#date           :20191228
+#version        :1.0
+#usage          :./batterymonitor
+#bash_version   :4.4.20(1)-release
+#============================================================================
+
+battery_level=$(acpi -b |cut -d "," -f2| sed 's/%//g') 
+echo $battery_level	 #$battery_level=13
+
+
+ac_power=$(acpi -b|grep -c "Charging")
+#1 if charging(plugged in) and 0 if discharging (not plugged in) 
+echo $ac_power
+
+#when the battery is charging and it gets charged above 80% 	
+if [[ $ac_power -eq 1 && $battery_level -gt 80 ]] 
+then
+export DISPLAY=:0.0 
+zenity --warning --text "Battery is above 80%\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger!</span>" --title "Battery Alert" --no-wrap;
+fi
+
+#when the battery is not charging and it goes below 30%
+if [[ $ac_power -eq 0 && $battery_level -lt 30 ]] 
+then
+export DISPLAY=:0.0
+zenity --warning --text "Battery is Low\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Connect the Charger!</span>" --title "Battery Alert" --no-wrap;
+fi
