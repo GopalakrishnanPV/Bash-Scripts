@@ -17,8 +17,8 @@ echo Enter the user story number :
 read USID
 echo Enter the story description :
 read USDESC
-SRCDIR=/mnt/Storage/XPO/Screenshots
-DESTDIR=/mnt/Storage/XPO/Screenshots/$(date +%Y-%m-%d)/XPO-$USID
+SRCDIR=/mnt/Storage/Career/XPO/Screenshots
+DESTDIR=/mnt/Storage/Career/XPO/Screenshots/$(date +%Y-%m-%d)/XPO-$USID
 echo "Test"
 
 COUNT=$(ls -1 $SRCDIR/*.png 2>/dev/null | wc -l)

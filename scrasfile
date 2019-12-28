@@ -4,12 +4,12 @@
 #author         :Gopalakrishnan
 #date           :20191228
 #version        :1.0    
-#usage          :./screenshot_as_file
+#usage          :./scrasfile
 #bash_version   :4.4.20(1)-release
 #============================================================================        
 
 #! /bin/bash
-DEST_PATH=/mnt/Storage/XPO/Screenshots
+DEST_PATH=/mnt/Storage/Career/XPO/Screenshots
 mkdir -p $DEST_PATH && gnome-screenshot -f $DEST_PATH/$(date +%Y%m%d%H%M%S).png
 
 
