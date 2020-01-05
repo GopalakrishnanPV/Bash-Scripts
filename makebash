@@ -62,9 +62,9 @@ _select_editor(){
 
     # Open the file with the cursor on the twelth line.
     case $editor in
-        1) sudo nano +12 $title
+        1) sudo subl +12 $title
             ;;
-        2) sudo vim +12 $title &
+        2) sudo nano +12 $title &
             ;;
         *) /usr/bin/clear
            printf "%s\n%s\n\n" "I did not understand your selection." \
