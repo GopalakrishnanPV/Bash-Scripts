@@ -20,12 +20,12 @@ echo $ac_power
 if [[ $ac_power -eq 1 && $battery_level -gt 80 ]] 
 then
 export DISPLAY=:0.0 
-zenity --warning --text "Battery is above 80%\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger!</span>" --title "Battery Alert" --no-wrap;
+zenity --warning --text "Battery is above 80%\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger.</span>" --title "Battery Alert" --no-wrap;
 fi
 
 #when the battery is not charging and it goes below 30%
 if [[ $ac_power -eq 0 && $battery_level -lt 35 ]] 
 then
 export DISPLAY=:0.0
-zenity --warning --text "Battery is Low\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Connect the Charger!</span>" --title "Battery Alert" --no-wrap;
+zenity --warning --text "Battery is Low\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Connect the Charger.</span>" --title "Battery Alert" --no-wrap;
 fi

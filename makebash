@@ -57,14 +57,14 @@ chmod +x $title
 _select_editor(){
 
     # Select between Vim or Emacs.
-    printf "%s\n%s\n%s\n\n" "Select an editor." "1 for Nano." "2 for Vim."
+    printf "%s\n%s\n%s\n\n" "Select an editor." "1 for Sublime." "2 for Nano."
     read -r editor
 
-    # Open the file with the cursor on the twelth line.
+    # Open the file with the cursor on the twelfth line.
     case $editor in
-        1) sudo subl +12 $title
+        1) subl +12 $title
             ;;
-        2) sudo nano +12 $title &
+        2) nano +12 $title &
             ;;
         *) /usr/bin/clear
            printf "%s\n%s\n\n" "I did not understand your selection." \
