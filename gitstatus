@@ -1,0 +1,18 @@
+#!/bin/bash     
+#title          :gitstatus
+#description    :Verifies the status of the projects in git
+#author         :mrblue 
+#date           :20200530
+#version        :1.0    
+#usage          :./gitstatus
+#bash_version   :4.4.20(1)-release
+#============================================================================        
+clear
+for dir in ./*; do
+cd $dir;
+pwd
+echo ---------------------------------------------------
+git status
+cd ..
+echo ---------------------------------------------------
+done

@@ -17,10 +17,9 @@ echo Enter the user story number :
 read USID
 echo Enter the story description :
 read USDESC
+USDESC="${USDESC// /_}"
 SRCDIR=/mnt/Storage/Career/XPO/Screenshots
-DESTDIR=/mnt/Storage/Career/XPO/Screenshots/$(date +%Y-%m-%d)/XPO-$USID
-echo "Test"
-
+DESTDIR=/mnt/Storage/Career/XPO/Screenshots/$(date +%Y-%m-%d)/$USID
 COUNT=$(ls -1 $SRCDIR/*.png 2>/dev/null | wc -l)
 if [$COUNT=0]
 then
@@ -32,13 +31,13 @@ mkdir -p $SRCDIR $DESTDIR
 
 CreatePDF(){
 WRKDIR=$(pwd)
-cd $SRCDIR && convert *.png $USID.pdf && mv *.png *.pdf $DESTDIR
+cd $SRCDIR && convert *.png ${USID}_${USDESC}.pdf && mv *.png *.pdf $DESTDIR
 }
 
 CreatePDF
 if [ $? -eq 0 ]; then
-    echo -e ${GREEN}PDF Created Successfully${NC}
     notify
+    echo -e ${GREEN}PDF Created Successfully${NC}
     read -p "Press any key to continue..."
     nemo $DESTDIR
 else

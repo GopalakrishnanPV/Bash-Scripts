@@ -9,7 +9,25 @@
 #bash_version   :4.4.19(1)-release
 #============================================================================
 clear
-echo Initiating system upgrade..
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y
-echo System upgrade complete.
-notify
+# Check if the user wants upgrade
+_select_editor(){
+printf "%s\n%s\n%s\n\n" "Do you want to upgrade the OS ?" "1 for Yes." "2 for No."
+read -r update
+    case $update in
+        1)  echo "Initiating system upgrade.."
+            sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
+            echo System upgrade complete.
+            notify
+            ;;
+        2) echo "System upgrade aborted"
+            ;;
+        *) /usr/bin/clear
+           printf "%s\n%s\n\n" "I did not understand your selection." \
+               "Press <Ctrl-c> to quit."
+           _select_editor
+            ;;
+    esac
+}
+_select_editor
+
+

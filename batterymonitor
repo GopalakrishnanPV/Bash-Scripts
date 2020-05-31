@@ -11,15 +11,20 @@
 battery_level=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E percentage | xargs | cut -d ' ' -f2 | sed s/%//)
 
 state=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E state | xargs | cut -d ' ' -f2 | sed s/%//)
-
-if [[ $state == 'charging' || $state == 'fully-charged' && $battery_level -gt 80 ]] 
+if [[ $state == 'fully-charged' ]]
 then
-export DISPLAY=:0.0 
-zenity --warning --text "Battery is above 80%\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger.</span>" --title "Battery Alert" --no-wrap;
+    zenity --warning --text "Battery is fully charged\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger.</span>" --title "Battery Alert" --no-wrap;
+fi
+
+if [[ $state == 'charging' && $battery_level -gt 80 ]] 
+then
+    export DISPLAY=:0.0 
+    zenity --warning --text "Battery is above 80%\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Disconnect the Charger.</span>" --title "Battery Alert" --no-wrap;
 fi
 
 if [[ $state == 'discharging' && $battery_level -lt 35 ]] 
 then
-export DISPLAY=:0.0
-zenity --warning --text "Battery is Low\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Connect the Charger.</span>" --title "Battery Alert" --no-wrap;
+    export DISPLAY=:0.0
+    zenity --warning --text "Battery is Low\n<b>Current Level: $battery_level%</b>\n\n<span foreground='red'>Please Connect the Charger.</span>" --title "Battery Alert" --no-wrap;
+    paplay /mnt/Storage/Music/Notification/error.mp3
 fi
