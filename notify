@@ -10,3 +10,4 @@
 
 #amixer -q -D pulse set Master 80%
 paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+notify-send $1
